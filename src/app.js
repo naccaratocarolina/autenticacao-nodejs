@@ -2,16 +2,25 @@ require('./config/dotenv')();
 require('./config/sequelize');
 
 const express = require('express');
-const routes = require('./routes/Routes');
 const app = express();
-const port = process.env.PORT;
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(routes);
+const fs = require('fs');
+const path = require('path');
 
+// Printa mensagem encriptada
+const encrypt = require('./cryptography/encrypt.js');
 
-app.listen(port, () => {
-  console.log(`${process.env.APP_NAME} app listening at ${process.env.APP_URL}`);
-});
+const pathToPubKey = path.join(__dirname,'../','id_rsa_pub.pem');
+const PUB_KEY = fs.readFileSync(pathToPubKey, 'utf8');
 
+const encryptedMessage = encrypt.encryptWithPublicKey(PUB_KEY, 'Mensagem super secreta');
+console.log(encryptedMessage.toString());
+
+// Decripta a mensagem
+const decrypt = require('./cryptography/decrypt.js');
+
+const pathToPrivKey = path.join(__dirname,'../','id_rsa_priv.pem');
+const PRIV_KEY = fs.readFileSync(pathToPrivKey, 'utf8');
+
+const decryptedMessage = decrypt.decryptWithPrivateKey(PRIV_KEY, encryptedMessage);
+console.log(decryptedMessage.toString());
