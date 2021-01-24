@@ -27,7 +27,9 @@ const login = async (req, res) => {
 };
 
 const getDetails = (req, res) => {
-	return res.status(201).json({ user: req.payload });
+	const token = req.rawHeaders[1].split(" ")[1];
+	const loggedUser = Auth.user(token);
+	return res.status(201).json({ user: loggedUser});
 };
 
 module.exports = {

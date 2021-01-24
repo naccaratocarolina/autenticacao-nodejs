@@ -31,8 +31,16 @@ const generateJsonWebToken = (user) => {
     return jsonwebtoken.sign(payload, PRIV_KEY, { expiresIn: '7d', algorithm: 'RS256' });
 };
 
+const user = (token) => {
+	const payload = token.split(".")[1];
+	const encodedPayload = Buffer.from(payload, 'base64');
+	const decodedPayload = encodedPayload.toString('utf-8');
+	return JSON.parse(decodedPayload);
+}
+
 module.exports = {
     generateHash,
     verifyPassword,
-    generateJsonWebToken
+    generateJsonWebToken,
+	user
 }
