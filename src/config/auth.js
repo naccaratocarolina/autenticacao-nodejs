@@ -42,5 +42,5 @@ module.exports = {
     generateHash,
     verifyPassword,
     generateJsonWebToken,
-	user
+		user
 }
