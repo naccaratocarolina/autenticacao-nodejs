@@ -13,15 +13,15 @@ const options = {
 }
 
 module.exports = (passport) => {
-    passport.use(new JwtStrategy(options, async (payload, done) => {
-        console.log(payload);
-		await User.findByPk(payload.sub)
-			.then((user) => {
-				if (user) {
-					return done(null, user);
-				} else {
-					return done(null, false);
-				}
+	passport.use(new JwtStrategy(options, async (payload, done) => {
+		console.log(payload);
+			await User.findByPk(payload.sub)
+				.then((user) => {
+					if (user) {
+						return done(null, user);
+					} else {
+						return done(null, false);
+					}
 			}).catch(err => done(err, null));
 	}))
 };
