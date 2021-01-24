@@ -12,17 +12,17 @@ const options = {
 	algorithms: ['RS256'] // RSA
 }
 
-const passportStrategy = new JwtStrategy(options, (payload, done) => {
-	const user = User.findByPk(payload.sub)
-		.then((user) => {
-			if (user) {
-				return done(null, user);
-			} else {
-				return done(null, false);
-			}
-		}).catch(err => done(err, null));
-});
+module.exports = (passport) => {
+    passport.use(new JwtStrategy(options, function(payload, done) {
 
-module.exporte = (passport) => {
-	passport.use(passportStrategy);
-}
+        console.log(payload);
+		const user = User.findByPk(payload.sub)
+			.then((user) => {
+				if (user) {
+					return done(null, user);
+				} else {
+					return done(null, false);
+				}
+			}).catch(err => done(err, null));
+	}))
+};

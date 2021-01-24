@@ -27,7 +27,7 @@ const login = async (req, res) => {
 };
 
 const getDetails = (req, res) => {
-    return res.status(201).json({ user: req.payload });
+	return res.status(201).json({ user: req.payload });
 };
 
 module.exports = {
