@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const sequelize = require("../config/sequelize");
+const Auth = require('../config/auth');
 
 const index = async(req,res) => {
     try {
@@ -21,10 +22,14 @@ const show = async(req,res) => {
 };
 
 const create = async(req,res) => {
+    const generateHash = Auth.generateHash(req.body.password);
+    const salt = generateHash.salt;
+    const hash = generateHash.hash;
+
     const newUserData = {
         email: req.body.email,
-        name: req.body.name,
-	      password:req.body.password
+        salt: salt,
+        hash: hash,
     }
 
     try {
@@ -38,7 +43,7 @@ const create = async(req,res) => {
 const update = async(req,res) => {
     const {id} = req.params;
     try {
-        const updated = await User.update(req.body, {where: {id: id}});
+        const updated = await User.update(req.body, {where: {id: req.params.id}});
         return res.status(200).json({user});
     }catch(err){
         return res.status(500).json({err});
