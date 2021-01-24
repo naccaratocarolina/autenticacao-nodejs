@@ -13,9 +13,9 @@ const options = {
 }
 
 module.exports = (passport) => {
-    passport.use(new JwtStrategy(options, (payload, done) => {
+    passport.use(new JwtStrategy(options, async (payload, done) => {
         console.log(payload);
-		const user = User.findByPk(payload.sub)
+		await User.findByPk(payload.sub)
 			.then((user) => {
 				if (user) {
 					return done(null, user);
