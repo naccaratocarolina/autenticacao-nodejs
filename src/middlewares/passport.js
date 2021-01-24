@@ -13,8 +13,7 @@ const options = {
 }
 
 module.exports = (passport) => {
-    passport.use(new JwtStrategy(options, function(payload, done) {
-
+    passport.use(new JwtStrategy(options, (payload, done) => {
         console.log(payload);
 		const user = User.findByPk(payload.sub)
 			.then((user) => {
