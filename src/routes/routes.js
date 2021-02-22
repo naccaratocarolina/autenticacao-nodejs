@@ -20,4 +20,13 @@ router.post('/users', UserController.create);
 router.put('/users/:id', UserController.update);
 router.delete('users/:id', UserController.destroy);
 
+// Rotas OAuth
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile']
+}));
+
+router.get('/google/redirect', (req, res) => {
+    res.send('you reached the redirect URI');
+});
+
 module.exports = router;

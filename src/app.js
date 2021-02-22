@@ -7,9 +7,13 @@ const routes = require('./routes/routes');
 const app = express();
 const port = process.env.PORT;
 
+// Setup JWT Strategy
 const passport = require('passport');
 require('./strategies/jwtStrategy')(passport);
 app.use(passport.initialize());
+
+// Setup OAuth Google Strategy
+require('./strategies/googleOAuthStrategy')(passport);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
