@@ -27,7 +27,7 @@ const login = async (req, res) => {
 };
 
 const getDetails = (req, res) => {
-	const token = req.rawHeaders[1].split(" ")[1];
+	const token = Auth.getToken(req);
 	const loggedUser = Auth.user(token);
 	return res.status(201).json({ user: loggedUser});
 };
