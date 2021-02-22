@@ -2,7 +2,6 @@ const {  Router } = require('express');
 const { model } = require('../config/sequelize.js');
 
 const AuthController = require('../controllers/AuthController');
-// const authMiddleware = require('../middlewares/authenticate');
 const passport = require('passport');
 
 const UserController = require('../controllers/UserController.js');
