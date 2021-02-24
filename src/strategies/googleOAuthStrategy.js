@@ -13,10 +13,11 @@ module.exports = (passport) => {
     console.log(profile);
 
 		await User.findOrCreate({where: {
+			googleId: profile.id,
 			name: profile.displayName,
-			thumbnail: profine._json.picture
+			thumbnail: profile._json.picture
 		}}).then((user) => {
-			console.lot('Ok');
+			console.log('Ok');
 		});
 
 	}))
