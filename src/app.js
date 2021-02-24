@@ -12,9 +12,6 @@ const passport = require('passport');
 require('./strategies/jwtStrategy')(passport);
 app.use(passport.initialize());
 
-// Setup OAuth Google Strategy
-require('./strategies/googleOAuthStrategy')(passport);
-
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(routes);
