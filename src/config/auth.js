@@ -24,13 +24,8 @@ const verifyPassword = (passwordTyped, salt, hash) => {
 
 const generateJsonWebToken = (user) => {
   const payload = {
-    sub: user.id,
     name: user.name,
-    email: user.email,
-    dateOfBirth: user.date_of_birth,
-    phoneNumber: user.phone_number ? user.phone_numbe : null,
-    gender: user.gender ? user.gender : null,
-    RoleId: user.RoleId ? user.RoleId : null
+    email: user.email
   }
 
   return jsonwebtoken.sign(payload, PRIV_KEY, { expiresIn: '7d', algorithm: 'RS256' });
