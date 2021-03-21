@@ -7,6 +7,11 @@
           body {
             background-color: #2D00AA;
             font-family: 'Inconsolata', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
           }
 
           #container {
@@ -18,9 +23,6 @@
             border-width: .875px 2px;
             box-shadow: -3.5px -7px 0 0 #bbb, 2.5px 6.125px 0 0 #bbb, -3.5px 6.125px 0 0 #bbb, 2.5px -7px 0 0 #bbb;
             filter: drop-shadow(7px 8px 0 black);
-            position: absolute;
-            left: 20vw;
-            top: 25vh;
           }
 
           header, main {
@@ -30,7 +32,10 @@
           }
 
           #container h1 {
-            width: 20vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: auto;
             background-color: black;
             color: #BBBBBB;
           }
