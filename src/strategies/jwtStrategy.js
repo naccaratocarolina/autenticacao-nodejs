@@ -13,8 +13,8 @@ const options = {
 }
 
 module.exports = (passport) => {
-  passport.use(new JwtStrategy(options, async (payload, done) => {
-    console.log(payload);
+	passport.use(new JwtStrategy(options, async (payload, done) => {
+		console.log(payload);
 			await User.findByPk(payload.sub)
 				.then((user) => {
 					if (user) {

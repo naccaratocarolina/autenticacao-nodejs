@@ -9,7 +9,7 @@ const register = (req, res) => {
 const login = async (req, res) => {
     try {
         const user = await User.findOne({ where: { email: req.body.email } });
-		
+
         const isValid = Auth.verifyPassword(req.body.password, user.dataValues.salt, user.dataValues.hash);
         if (isValid) {
             const token = Auth.generateJsonWebToken(user);

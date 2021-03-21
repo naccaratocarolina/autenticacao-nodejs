@@ -24,7 +24,7 @@ const verifyPassword = (passwordTyped, salt, hash) => {
 
 const generateJsonWebToken = (user) => {
   const payload = {
-    name: user.name,
+    sub: user.id,
     email: user.email
   }
 
