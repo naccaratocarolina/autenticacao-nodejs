@@ -3,26 +3,38 @@ require('./config/sequelize');
 const path = require('path');
 const cors = require('cors');
 const express = require('express');
-const routes = require('./routes/routes');
+const authRoutes = require('./routes/authRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 const app = express();
 const port = process.env.PORT;
-
-// Setup OAuth Google Strategy
-const passport = require('passport');
-require('./strategies/googleOAuthStrategy')(passport);
 
 // Setup das views
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views/'));
 
+// Setup Cookie-Session Authentication
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000, // 1 dia em milisegundos
+  keys: [process.env.COOKIE_KEY], // chave para encriptar e decriptar um cookie
+}));
+
+// Setup OAuth Google Strategy
+const passport = require('passport');
+require('./strategies/googleOAuthStrategy')(passport);
+
+// Inicializando o Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', { user: req.user });
 });
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(routes);
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
 
 app.listen(port, () => {
   console.log(`${process.env.APP_NAME} app listening at ${process.env.APP_URL}`);

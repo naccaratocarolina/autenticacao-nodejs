@@ -30,7 +30,6 @@
           }
 
           #container h1 {
-            width: 20vw;
             background-color: black;
             color: #BBBBBB;
           }
@@ -75,24 +74,24 @@
     <body>
       <div id="container">
         <header>
-            <h1>Autenticação NodeJS</h1>
-            <h2>Pagina principal</h2>
+            <h1>Bem-vindx ao seu perfil :)</h1>
+            <h2><%= user.name %></h2>
         </header>
 
         <main>
-            <p>Provavelmente o melhor tutorial de Autenticação no planeta :)</p>
+            <img src="<%= user.thumbnail %>" />
         </main>
 
         <nav>
-            <ul>
-              <li><a href="/">Principal</a></li>
-              <% if (user) { %>
-              <li><a href="/profile">Perfil</a></li>
-              <li><a href="/auth/logout">Sair</a></li>
-              <% } else { %>
-              <li><a href="/auth/login">Entrar</a></li>
-              <% } %>
-            </ul>
+          <ul>
+            <li><a href="/">Principal</a></li>
+            <% if (user) { %>
+            <li><a href="/profile">Perfil</a></li>
+            <li><a href="/auth/logout">Sair</a></li>
+            <% } else { %>
+            <li><a href="/auth/login">Entrar</a></li>
+            <% } %>
+          </ul>
         </nav>
       </div>
     </body>

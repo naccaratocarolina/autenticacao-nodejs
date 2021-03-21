@@ -4,65 +4,113 @@
         <meta charset="utf-8">
         <title>OAuth Tutorials</title>
         <style>
-            * {
-              color: #00ff00;
-            }
-            body{
-                font-family: arial;
-                margin: 0;
-                background: #000000;
-            }
-            nav{
-                background: #252525;
-                padding: 20px 10px;
-            }
-            nav ul{
-                max-width: 960px;
-                margin: 0 auto;
-                padding: 0;
-            }
-            nav li{
-                list-style-type: none;
-                display: inline-block;
-                margin: 0 10px 0 0;
-            }
-            nav a{
-                color: #00ff00;
-                font-size: 18px;
-                background: rgba(0,255,0,0.2);
-                text-decoration: none;
-                padding: 10px;
-                display: block;
-            }
-            main, header{
-                max-width: 960px;
-                margin: 30px auto;
-                padding: 0 10px;
-                color: #333;
-            }
-            .google-btn{
-                color: #000000;
-                text-decoration: none;
-                font-size: 18px;
-                padding: 10px;
-                background: #00ff00;
-            }
+          body {
+            background-color: #2D00AA;
+            font-family: 'Inconsolata', monospace;
+          }
+
+          #container {
+            background-color: #BBBBBB;
+            width: 60vw;
+            height: 45vh;
+            padding: 6.125px 11.5px 7px 10.5px;
+            border-style: solid;
+            border-width: .875px 2px;
+            box-shadow: -3.5px -7px 0 0 #bbb, 2.5px 6.125px 0 0 #bbb, -3.5px 6.125px 0 0 #bbb, 2.5px -7px 0 0 #bbb;
+            filter: drop-shadow(7px 8px 0 black);
+            position: absolute;
+            left: 20vw;
+            top: 25vh;
+          }
+
+          header, main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          #container h1 {
+            width: 20vw;
+            background-color: black;
+            color: #BBBBBB;
+          }
+
+          #container nav {
+            width: 60vw;
+            position: absolute;
+            bottom: 2vh;
+            display: flex;
+            justify-content: center;
+          }
+
+          #container nav li {
+            list-style-type: none;
+            display: inline-block;
+            border-color: #04a1a1;
+            background: #04a1a1;
+            color: #fff;
+            border-radius: 0;
+            font-size: 24px;
+            padding: .25rem .75rem;
+            -webkit-filter: drop-shadow(7px 8px 0 #000);
+            filter: drop-shadow(7px 8px 0 black);
+            margin-top: .25rem;
+          }
+
+        #container nav li:hover {
+            border-color: #d2ff55;
+            background: #d2ff55;
+            color: black;
+        }
+
+        nav a {
+          color: #000000;
+          font-size: 18px;
+          text-decoration: none;
+          padding: 10px;
+          display: block;
+        }
+
+        #google-btn {
+          color: #BBBBBB;
+          width: 5vw;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50px;
+          text-decoration: none;
+          font-size: 18px;
+          padding: 10px;
+          background: #DB4437;
+        }
+
+        #google-btn:hover {
+          background: #df574b;
+        }
         </style>
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/oauth_login">Login</a></li>
-                <li><a href="/oauth_logout">Logout</a></li>
-            </ul>
-        </nav>
+      <div id="container">
         <header>
             <h1>Autenticação NodeJS</h1>
-            <h2>Home</h2>
+            <h2>Entrar</h2>
         </header>
+
         <main>
-            <a class="google-btn" href="/google">Google+</a>
+            <a id="google-btn" href="/auth/google">Google+</a>
         </main>
+
+        <nav>
+          <ul>
+            <li><a href="/">Principal</a></li>
+            <% if (user) { %>
+            <li><a href="/profile">Perfil</a></li>
+            <li><a href="/auth/logout">Sair</a></li>
+            <% } else { %>
+            <li><a href="/auth/login">Entrar</a></li>
+            <% } %>
+          </ul>
+        </nav>
+      </div>
     </body>
 </html>
