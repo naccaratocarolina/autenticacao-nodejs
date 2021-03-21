@@ -19,9 +19,14 @@ app.use(cookieSession({
   keys: [process.env.COOKIE_KEY], // chave para encriptar e decriptar um cookie
 }));
 
-// Setup OAuth Google Strategy
+// Importando o Passport globalmente
 const passport = require('passport');
+
+// Setup OAuth Google Strategy
 require('./strategies/googleOAuthStrategy')(passport);
+
+// Setup OAuth Facebook Strategy
+require('./strategies/facebookOauthStrategy')(passport);
 
 // Inicializando o Passport
 app.use(passport.initialize());

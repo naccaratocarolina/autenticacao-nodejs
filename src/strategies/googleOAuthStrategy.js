@@ -2,8 +2,8 @@ const GoogleStrategy = require('passport-google-oauth20');
 const User = require('../models/User');
 
 const options = {
-	clientID: process.env.CLIENT_ID,
-	clientSecret: process.env.CLIENT_SECRET,
+	clientID: process.env.GOOGLE_CLIENT_ID,
+	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 	callbackURL: '/auth/google/redirect'
 };
 
@@ -39,7 +39,7 @@ module.exports = (passport) => {
 					done(null, newUser);
 				});
 			}
-		})
+		});
 
 	}));
 };

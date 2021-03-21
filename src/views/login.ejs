@@ -76,7 +76,7 @@
           display: block;
         }
 
-        #google-btn {
+        .login-btn {
           color: #BBBBBB;
           width: 5vw;
           display: flex;
@@ -86,11 +86,23 @@
           text-decoration: none;
           font-size: 18px;
           padding: 10px;
+          margin: 0.5% 0 0.5% 0;
+        }
+
+        #google {
           background: #DB4437;
         }
 
-        #google-btn:hover {
+        #google:hover {
           background: #df574b;
+        }
+
+        #facebook {
+          background: #3b5998;
+        }
+
+        #facebook:hover {
+          background: #4f6aa2;
         }
         </style>
     </head>
@@ -102,7 +114,8 @@
         </header>
 
         <main>
-            <a id="google-btn" href="/auth/google">Google+</a>
+            <a class="login-btn" id="google" href="/auth/google">Google+</a>
+            <a class="login-btn" id="facebook" href="/auth/facebook">Facebook</a>
         </main>
 
         <nav>
