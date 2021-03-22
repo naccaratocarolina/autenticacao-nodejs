@@ -8,16 +8,6 @@ const options = {
 };
 
 module.exports = (passport) => {
-	passport.serializeUser((user, done) => {
-		done(null, user.id)
-	});
-
-	passport.deserializeUser((id, done) => {
-		User.findByPk(id).then((user) => {
-			done(null, user);
-		});
-	});
-
 	passport.use(new GoogleStrategy(options, async (accessToken, refreshToken, profile, done) => {
     console.log(profile);
 

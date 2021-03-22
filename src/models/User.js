@@ -21,6 +21,14 @@ const User = sequelize.define('User', {
      thumbnail: {
 			 type: DataTypes.STRING
      },
+
+		 salt: {
+        type: DataTypes.STRING
+    },
+
+    hash: {
+        type: DataTypes.STRING
+    }
 });
 
 module.exports = User;

@@ -1,7 +1,8 @@
 require('./config/dotenv')();
 require('./config/sequelize');
+const User = require('./models/User');
 const path = require('path');
-const cors = require('cors');
+
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 
@@ -29,6 +30,17 @@ require('./strategies/googleOAuthStrategy')(passport);
 
 // Setup OAuth Facebook Strategy
 require('./strategies/facebookOauthStrategy')(passport);
+
+// Serializando e deserializando usuarios
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+});
+
+passport.deserializeUser((id, done) => {
+  User.findByPk(id).then((user) => {
+    done(null, user);
+  });
+});
 
 // Inicializando o Passport
 app.use(passport.initialize());
