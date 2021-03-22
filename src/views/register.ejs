@@ -40,6 +40,24 @@
             color: #BBBBBB;
           }
 
+          #container form {
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+          }
+
+          #container .create-user-input {
+            border: none;
+            margin: 3% 0 3% 0;
+            padding: 0 0 0 5%;
+            height: 5vh;
+            width: 15vw;
+            background: #000000;
+            color: #BBBBBB;
+            font-size: 20px;
+          }
+
           #container nav {
             width: 60vw;
             position: absolute;
@@ -48,7 +66,7 @@
             justify-content: center;
           }
 
-          #container nav li {
+          #container nav li, #submit-btn {
             list-style-type: none;
             display: inline-block;
             border-color: #04a1a1;
@@ -61,7 +79,11 @@
             margin-top: .25rem;
           }
 
-        #container nav li:hover {
+          #submit-btn {
+            width: 5vw;
+          }
+
+        #container nav li:hover, #submit-btn:hover {
             border-color: #d2ff55;
             background: #d2ff55;
             color: black;
@@ -74,60 +96,34 @@
           padding: 10px;
           display: block;
         }
-
-        .login-btn {
-          color: #BBBBBB;
-          width: 5vw;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 50px;
-          text-decoration: none;
-          font-size: 18px;
-          padding: 10px;
-          margin: 0.5% 0 0.5% 0;
-        }
-
-        #google {
-          background: #DB4437;
-        }
-
-        #google:hover {
-          background: #df574b;
-        }
-
-        #facebook {
-          background: #3b5998;
-        }
-
-        #facebook:hover {
-          background: #4f6aa2;
-        }
         </style>
     </head>
     <body>
       <div id="container">
         <header>
             <h1>Autenticação NodeJS</h1>
-            <h2>Entrar</h2>
+            <h2>Registrar</h2>
         </header>
 
         <main>
-            <a class="login-btn" id="google" href="/auth/google">Google+</a>
-            <a class="login-btn" id="facebook" href="/auth/facebook">Facebook</a>
+            <form action="/auth/register" method="POST">
+              <input class="create-user-input" type="email" name="email" placeholder="email"><br>
+              <input class="create-user-input" type="password" name="password" placeholder="password"><br>
+              <button id="submit-btn" type="submit">Criar</button>
+            </form>
         </main>
 
         <nav>
-          <ul>
-            <li><a href="/">Principal</a></li>
-            <% if (user) { %>
-            <li><a href="/profile">Perfil</a></li>
-            <li><a href="/auth/logout">Sair</a></li>
-            <% } else { %>
-            <li><a href="/auth/login">Entrar</a></li>
-            <li><a href="/auth/register">Registrar</a></li>
-            <% } %>
-          </ul>
+            <ul>
+              <li><a href="/">Principal</a></li>
+              <% if (user) { %>
+              <li><a href="/profile">Perfil</a></li>
+              <li><a href="/auth/logout">Sair</a></li>
+              <% } else { %>
+              <li><a href="/auth/login">Entrar</a></li>
+              <li><a href="/auth/register">Registrar</a></li>
+              <% } %>
+            </ul>
         </nav>
       </div>
     </body>
