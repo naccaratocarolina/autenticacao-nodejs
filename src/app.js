@@ -2,10 +2,8 @@ require('./config/dotenv')();
 require('./config/sequelize');
 const User = require('./models/User');
 const path = require('path');
-
 const express = require('express');
 const { check, validationResult } = require('express-validator');
-
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const app = express();
@@ -14,6 +12,7 @@ const port = process.env.PORT;
 // Setup das views
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views/'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Setup Cookie-Session Authentication
 const cookieSession = require('cookie-session');
@@ -24,6 +23,9 @@ app.use(cookieSession({
 
 // Importando o Passport globalmente
 const passport = require('passport');
+
+//Setup JWT Strategy
+require('./strategies/jwtStrategy')(passport);
 
 // Setup OAuth Google Strategy
 require('./strategies/googleOAuthStrategy')(passport);

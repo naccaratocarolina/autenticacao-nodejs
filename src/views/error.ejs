@@ -3,17 +3,24 @@
     <head>
         <meta charset="utf-8">
         <title>OAuth Tutorials</title>
-        <link rel="stylesheet" type="text/css" href="/style/home.css">
+        <link rel="stylesheet" type="text/css" href="/style/home.css"></link>
+        <style>
+          body {
+            background-color: #b80000;
+          }
+        </style>
     </head>
     <body>
       <div id="container">
         <header>
-            <h1>Autenticação NodeJS</h1>
-            <h2>Pagina principal</h2>
+            <h1>Erro</h1>
+            <h2>Algo deu errado :(</h2>
         </header>
 
         <main>
-            <p>Provavelmente o melhor tutorial de Autenticação no planeta :)</p>
+          <% if (message) { %>
+            <p><%= message %></p>
+          <% } %>
         </main>
 
         <nav>

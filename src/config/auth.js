@@ -1,9 +1,7 @@
 const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
-
 const fs = require('fs');
 const path = require('path');
-
 const pathToKey = path.join(__dirname, '../../', 'id_rsa_priv.pem');
 const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
 
@@ -25,7 +23,9 @@ const verifyPassword = (passwordTyped, salt, hash) => {
 const generateJsonWebToken = (user) => {
   const payload = {
     sub: user.id,
-    email: user.email
+    email: user.email,
+    name: user.name,
+    thumbnail: user.thumbnail
   }
 
   return jsonwebtoken.sign(payload, PRIV_KEY, { expiresIn: '7d', algorithm: 'RS256' });
@@ -33,7 +33,6 @@ const generateJsonWebToken = (user) => {
 
 const getToken = (req) => {
   const header = req.get('Authorization');
-  if (!header) return error;
   return header.split(' ')[1];
 }
 

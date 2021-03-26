@@ -8,15 +8,13 @@
     <body>
       <div id="container">
         <header>
-            <h1>Bem-vinde ao seu perfil :)</h1>
+            <h1>Detalhes</h1>
             <h2><%= user.name? user.name : user.email%></h2>
         </header>
 
         <main>
             <img src="<%= user.thumbnail %>" />
-            <% if (token) { %>
-              <a href="/auth/getDetails?token=<%= token %>">Ver mais</a>
-            <% } %>
+            <a href="/auth/getDetails?token=<%= token %>">Ver mais</a>
         </main>
 
         <nav>
