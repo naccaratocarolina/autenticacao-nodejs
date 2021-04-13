@@ -1,13 +1,14 @@
 require('./config/dotenv')();
 require('./config/sequelize');
-const User = require('./models/User');
 const path = require('path');
 const express = require('express');
-const { check, validationResult } = require('express-validator');
-const authRoutes = require('./routes/authRoutes');
-const profileRoutes = require('./routes/profileRoutes');
 const app = express();
 const port = process.env.PORT;
+
+// Rotas
+const JWTRoutes = require('./routes/JWTRoutes');
+const OAuthRoutes = require('./routes/OAuthRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 
 // Setup das views
 app.set('view engine', 'ejs');
@@ -34,27 +35,23 @@ require('./strategies/googleOAuthStrategy')(passport);
 require('./strategies/facebookOauthStrategy')(passport);
 
 // Serializando e deserializando usuarios
-passport.serializeUser((user, done) => {
-  done(null, user.id)
-});
-
-passport.deserializeUser((id, done) => {
-  User.findByPk(id).then((user) => {
-    done(null, user);
-  });
-});
+require('./config/serializeAndDeserializeUsers.js');
 
 // Inicializando o Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Criando a rota home
 app.get('/', (req, res) => {
     res.render('home', { user: req.user });
 });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
-app.use('/auth', authRoutes);
+
+// Adicionando o prefixo auth/ nas rotas de autenticacao e /profile nas de perfil
+app.use('/auth', JWTRoutes);
+app.use('/auth', OAuthRoutes);
 app.use('/profile', profileRoutes);
 
 app.listen(port, () => {
