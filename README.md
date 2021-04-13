@@ -41,6 +41,10 @@ DB_HOST=localhost
 DB_PORT=3306
 DB_DATABASE=autenticacao
 ```
+### 7. Gere as chaves de Criptografia
+```
+node src/config/generateRSAKeyPair.js
+```
 ### 7. Sirva o projeto
 ```
 node src/app.js
