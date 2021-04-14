@@ -21,8 +21,6 @@ const register = async (req, res) => {
           const token = Auth.generateJsonWebToken(user);
           res.status(200).render('profile', { user: user, token: token });
       }
-
-      res.render('profile', { user: user, token: token });
   } catch(err){
       return res.status(500).render('error', { user: null, message: err});
   }
