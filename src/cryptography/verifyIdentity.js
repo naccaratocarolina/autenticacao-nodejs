@@ -24,7 +24,7 @@ const originalHashHex = hash.digest('hex');
 
 // Compara a hash gerada com a recebida para definir se os dados foram alterados
 if (originalHashHex === decryptedMessageHex) {
-	console.log('ok');
+	console.log('Autenticidade garantida => Dados nao foram alterados e a pessoa que assinou o documento eh quem diz ser.');
 } else {
-	console.log('deu ruim');
+	console.log('Mensagem nao eh autentica.');
 }

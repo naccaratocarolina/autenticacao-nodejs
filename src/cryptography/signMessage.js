@@ -24,13 +24,13 @@ hash.update(myDataToString);
 const hashedData = hash.digest('hex');
 
 // Criando uma assinatura para a mensagem
-const signMessage = encrypt.encryptWithPrivateKey(PRIV_KEY, hashedData);
+const signedMessage = encrypt.encryptWithPrivateKey(PRIV_KEY, hashedData);
 
 // Passando as informacoes necessarias para o receptor possa veriricar se a assiantura eh valida
 const packageOfDataToSend = {
 	algorithm: 'sha256',
 	originalData: data,
-	signedAndEncryptedData: signMessage
+	signedAndEncryptedData: signedMessage
 };
 
 module.exports.packageOfDataToSend = packageOfDataToSend;
