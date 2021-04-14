@@ -22,11 +22,38 @@ git checkout final
 ```
 npm install
 ```
-### 4. Sirva o projeto
+### 4. Crie um banco de dados no phpmyadmin ou pelo bash
+```
+mysql -u root -p
+CREATE DATABASE autenticacao CHARACTER SET utf8 COLLATE utf8_bin;
+```
+### 5. Crie o .env
+```
+cp .env.example .env
+```
+### 6. Configure o .env
+```
+# DATABASE
+DB_CONNECTION=mysql
+DB_USERNAME=root
+DB_PASSWORD=<senha>
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=autenticacao
+```
+### 7. Migre as tabelas para o banco de dados criado
+```
+node src/database/migrate.js
+```
+### 8. Gere as chaves de Criptografia
+```
+node src/config/generateRSAKeyPair.js
+```
+### 9. Sirva o projeto
 ```
 node src/app.js
 ```
-### 5. Abra o proejto no browser
+### 10. Abra o proejto no browser
 ```
 http://localhost:3333
 ```
