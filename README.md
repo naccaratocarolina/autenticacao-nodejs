@@ -41,15 +41,19 @@ DB_HOST=localhost
 DB_PORT=3306
 DB_DATABASE=autenticacao
 ```
-### 7. Gere as chaves de Criptografia
+### 7. Migre as tabelas para o banco de dados criado
+```
+node src/database/migrate.js
+```
+### 8. Gere as chaves de Criptografia
 ```
 node src/config/generateRSAKeyPair.js
 ```
-### 7. Sirva o projeto
+### 9. Sirva o projeto
 ```
 node src/app.js
 ```
-### 8. Abra o proejto no browser
+### 10. Abra o proejto no browser
 ```
 http://localhost:3333
 ```
